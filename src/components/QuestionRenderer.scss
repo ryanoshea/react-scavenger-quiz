@@ -1,0 +1,49 @@
+.question {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+
+    &.active {
+        opacity: 1;
+    }
+
+    .prompt {
+        font-size: 1.2em;
+    }
+
+    .alert {
+        animation-duration: 200ms;
+
+        &:not(.removing) {
+            animation-name: fade;
+        }
+        &.removing {
+            animation-name: fade-out;
+        }
+    }
+}
+
+.back-button {
+    padding: 0;
+    font-size: 0.8em;
+}
+
+@keyframes fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+

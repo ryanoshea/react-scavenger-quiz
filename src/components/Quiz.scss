@@ -1,0 +1,43 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap/scss/variables";
+
+header {
+    margin-top: 1em;
+
+    h1 {
+        text-align: center;
+        white-space: nowrap;
+
+        & > * {
+            vertical-align: middle;
+        }
+
+        @media (max-width: map-get($grid-breakpoints, "md")) {
+            $headerSize: 1.75em;
+            .emoji {
+                font-size: $headerSize;
+            }
+            img {
+                height: 2 * $headerSize;
+            }
+        }
+        @media (min-width: map-get($grid-breakpoints, "md")) {
+            $headerSize: 2.5em;
+            .emoji {
+                font-size: $headerSize;
+            }
+            img {
+                height: 2 * $headerSize;
+            }
+        }
+
+
+        img {
+            display: inline-block;
+
+            margin: 0 0.5em 1em;
+        }
+    }
+}
