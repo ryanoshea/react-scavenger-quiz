@@ -18,12 +18,12 @@ const QuestionRenderer = (props: {
     });
 
     return <div className='question'>
-        {model.prompts.map(
-            (prompt, i) => <p
-                key={i}
-                className='prompt'
-            >{prompt}</p>
-        )}
+        {model.prompts.map((prompt, i) => <p
+            key={i}
+            className='prompt'
+        >
+            {prompt}
+        </p>)}
         <form
             onSubmit={e => {
                 e.preventDefault();
