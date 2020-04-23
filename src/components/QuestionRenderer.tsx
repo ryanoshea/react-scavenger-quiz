@@ -1,8 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import { Question } from '../data/QuizData';
+import { Question, QUESTIONS } from '../data/QuizData';
 import { DISPATCH_TYPE, ACTIONS, State } from '../reducer/State';
 import classNames from 'classnames';
 import './QuestionRenderer.scss';
+import Progress from './Progress';
 
 const QuestionRenderer = (props: {
     model: Question,
@@ -53,63 +54,74 @@ const QuestionRenderer = (props: {
     };
 
     return <div
-        ref={container}
         className={classNames('question')}
+        ref={container}
     >
-        {model.prompts.map((prompt, i) => <p
-            key={i}
-            className='prompt'
-        >
-            {prompt}
-        </p>)}
-        {model.hasAnswers && <>
-            <form
-                onSubmit={e => {
-                    e.preventDefault();
-                }}
+        <div className='question-body'>
+            {model.prompts.map((prompt, i) => <p
+                key={i}
+                className='prompt'
             >
-                <div className='form-group'>
-                    <div className='input-group mb-3'>
-                        <input
-                            type='text'
-                            value={answer}
-                            onChange={e => dispatch({
-                                type: ACTIONS.UPDATE_ANSWER,
-                                payload: e.target.value
-                            })}
-                            className='form-control'
-                        />
-                        <div className='input-group-append'>
-                            <button
-                                className='btn btn-primary'
-                                onClick={submit}
-                            >
-                                Send
-                            </button>
+                {prompt}
+            </p>)}
+            {model.hasAnswers &&
+                <form
+                    onSubmit={e => {
+                        e.preventDefault();
+                    }}
+                >
+                    <div className='form-group'>
+                    <div className='input-group mb-3 answer-box'>
+                            <input
+                                type='text'
+                                value={answer}
+                                onChange={e => dispatch({
+                                    type: ACTIONS.UPDATE_ANSWER,
+                                    payload: e.target.value
+                                })}
+                                className='form-control'
+                                placeholder={'Type the answer'}
+                                autoFocus
+                            />
+                            <div className='input-group-append'>
+                                <button
+                                    className='btn btn-primary'
+                                    onClick={submit}
+                                >
+                                    Send
+                                </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                {(prevSubmitIncorrect || hidingWrongAnswerAlert) &&
-                    <div
-                        className={classNames(
-                            'alert alert-danger',
-                            {
-                                'removing': hidingWrongAnswerAlert
-                            }
-                        )}
-                        role='alert'
-                    >
-                        Try again.
-                    </div>
-                }
-            </form>
-            {questionIdx > 0 && <button
-                className='btn btn-link back-button'
-                onClick={() => dispatch({type: ACTIONS.GO_PREV_QUESTION})}
-            >
-                ← Back
-            </button>}
-        </>}
+                    {(prevSubmitIncorrect || hidingWrongAnswerAlert) &&
+                        <div
+                            className={classNames(
+                                'alert alert-danger',
+                                {
+                                    'removing': hidingWrongAnswerAlert
+                                }
+                            )}
+                            role='alert'
+                        >
+                            Try again.
+                        </div>
+                    }
+                </form>
+            }
+        </div>
+        <div className='row'>
+            <div className='col-4'>
+                {questionIdx > 0 && <button
+                    className='btn btn-link back-button'
+                    onClick={() => dispatch({ type: ACTIONS.GO_PREV_QUESTION })}
+                >
+                    ← Back
+                    </button>}
+            </div>
+            <div className='col-8 progress-col'>
+                <Progress current={questionIdx + 1} total={QUESTIONS.length} />
+            </div>
+        </div>
     </div>;
 }
 

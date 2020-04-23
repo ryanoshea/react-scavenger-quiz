@@ -1,0 +1,31 @@
+.progress-wrapper {
+    display: flex;
+    align-items: center;
+
+    .progress {
+        width: 80%;
+        background-color: rgba(255,255,255,0.3);
+        height: 0.7em;
+        border-radius: 0.25em;
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+
+        .bar {
+            background-color: #b7e4cF;
+            flex: 0 0 auto;
+        }
+
+        .remainder {
+            flex: 1 1 0;
+        }
+    }
+
+    .label {
+        width: 20%;
+        padding-right: 0.75em;
+        padding-bottom: 0.1em;
+        font-size: 0.8em;
+        text-align: right;
+    }
+}
