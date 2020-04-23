@@ -10,24 +10,22 @@ const Quiz = () => {
     const question = QUESTIONS[state.questionIdx];
     const emoji = <Emoji char='🎉' desc='celebration' />;
 
-    return <div className='quiz'>
-        <header>
-            <h1>
-                {emoji}
-                <img src='./images/animoji.png' alt='tess'/>
-                {emoji}
-            </h1>
-        </header>
-        <div className='row justify-content-center'>
-            <div className='col-11 col-md-8 col-lg-6'>
-                <QuestionRenderer
-                    model={question}
-                    state={state}
-                    dispatch={dispatch}
-                />
+    return (
+        <div className='quiz'>
+            <header>
+                <h1>
+                    {emoji}
+                    <img src='./images/animoji.png' alt='tess' />
+                    {emoji}
+                </h1>
+            </header>
+            <div className='row justify-content-center'>
+                <div className='col-11 col-md-8 col-lg-6'>
+                    <QuestionRenderer model={question} state={state} dispatch={dispatch} />
+                </div>
             </div>
         </div>
-    </div>;
-}
+    );
+};
 
 export default Quiz;

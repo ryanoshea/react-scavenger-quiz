@@ -7,7 +7,7 @@ export class State {
         public prevSubmitIncorrect = false,
         public hidingWrongAnswerAlert = false,
         public fadeQuestionIn = false
-    ) { }
+    ) {}
 }
 
 export const INITIAL_STATE = new State();
@@ -16,18 +16,15 @@ export const ACTIONS = {
     UPDATE_ANSWER: 'updateAnswer',
     SUBMIT_ANSWER: 'submitAnswer',
     FINISH_HIDING_WRONG_ANSWER_ALERT: 'finishHidingWrongAnswerAlert',
-    GO_PREV_QUESTION: 'goPrevQuestion'
-}
-
-export type DISPATCH_TYPE = {
-    type: string,
-    payload?: any
+    GO_PREV_QUESTION: 'goPrevQuestion',
 };
 
-export type REDUCER_TYPE = (
-    state: State,
-    action: DISPATCH_TYPE
-) => State;
+export type DISPATCH_TYPE = {
+    type: string;
+    payload?: any;
+};
+
+export type REDUCER_TYPE = (state: State, action: DISPATCH_TYPE) => State;
 
 export const REDUCER: REDUCER_TYPE = (state, action) => {
     const newState = { ...state } as State;
