@@ -1,10 +1,12 @@
+@import '../styles/variables';
+
 .progress-wrapper {
     display: flex;
     align-items: center;
 
     .progress {
         width: 80%;
-        background-color: rgba(255,255,255,0.3);
+        background-color: rgba(255, 255, 255, 0.3);
         height: 0.7em;
         border-radius: 0.25em;
         overflow: hidden;
@@ -12,12 +14,11 @@
         flex-direction: row;
 
         .bar {
-            background-color: #b7e4cF;
+            background-color: $libertyGreen;
             flex: 0 0 auto;
-        }
-
-        .remainder {
-            flex: 1 1 0;
+            // If this is longer than the animation for fading the question, safari will render the input offset for some reason...
+            transition: width 200ms ease-in-out;
+            width: 0;
         }
     }
 

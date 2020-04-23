@@ -4,7 +4,7 @@ import './Progress.scss';
 const Progress = (props: { current: number; total: number }) => {
     const { current, total } = props;
 
-    const percent = (100 * current) / total;
+    const percent = Math.round((100 * current) / total);
 
     return (
         <div className='progress-wrapper'>
@@ -20,7 +20,6 @@ const Progress = (props: { current: number; total: number }) => {
                         width: percent + '%',
                     }}
                 ></div>
-                <div className='remainder'></div>
             </div>
         </div>
     );

@@ -17,6 +17,7 @@ export const ACTIONS = {
     SUBMIT_ANSWER: 'submitAnswer',
     FINISH_HIDING_WRONG_ANSWER_ALERT: 'finishHidingWrongAnswerAlert',
     GO_PREV_QUESTION: 'goPrevQuestion',
+    START_QUIZ: 'startQuiz',
 };
 
 export type DISPATCH_TYPE = {
@@ -31,6 +32,11 @@ export const REDUCER: REDUCER_TYPE = (state, action) => {
     const question = QUESTIONS[state.questionIdx];
 
     switch (action.type) {
+        case ACTIONS.START_QUIZ:
+            newState.questionIdx = 1;
+            newState.answer = '';
+            newState.prevSubmitIncorrect = false;
+            break;
         case ACTIONS.UPDATE_ANSWER:
             newState.answer = action.payload;
             newState.prevSubmitIncorrect = false;

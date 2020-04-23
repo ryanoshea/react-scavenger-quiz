@@ -4,6 +4,7 @@ import { DISPATCH_TYPE, ACTIONS, State } from '../reducer/State';
 import classNames from 'classnames';
 import './QuestionRenderer.scss';
 import Progress from './Progress';
+import Emoji from './Emoji';
 
 const QuestionRenderer = (props: { model: Question; state: State; dispatch: React.Dispatch<DISPATCH_TYPE> }) => {
     const {
@@ -43,13 +44,13 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
         }
     }, [hidingWrongAnswerAlert, dispatch]);
 
-    const submit = () => {
-        if (model.checkAnswer(answer)) {
+    const submit = (action: string) => {
+        if (action !== ACTIONS.SUBMIT_ANSWER || model.checkAnswer(answer)) {
             container.current?.classList.remove('active');
             setTimeout(
                 () =>
                     dispatch({
-                        type: ACTIONS.SUBMIT_ANSWER,
+                        type: action,
                     }),
                 ANIMATION_DELAY
             );
@@ -68,33 +69,49 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
                         {prompt}
                     </p>
                 ))}
-                {model.hasAnswers && (
+                {(model.hasAnswers || questionIdx === 0) && (
                     <form
                         onSubmit={e => {
                             e.preventDefault();
                         }}
                     >
                         <div className='form-group'>
-                            <div className='input-group mb-3 answer-box'>
-                                <input
-                                    type='text'
-                                    value={answer}
-                                    onChange={e =>
-                                        dispatch({
-                                            type: ACTIONS.UPDATE_ANSWER,
-                                            payload: e.target.value,
-                                        })
-                                    }
-                                    className='form-control'
-                                    placeholder={'Type the answer'}
-                                    autoFocus
-                                />
-                                <div className='input-group-append'>
-                                    <button className='btn btn-primary' onClick={submit}>
-                                        Send
+                            {questionIdx > 0 ? (
+                                <div className='input-group mb-3 answer-box'>
+                                    <input
+                                        type='text'
+                                        value={answer}
+                                        onChange={e =>
+                                            dispatch({
+                                                type: ACTIONS.UPDATE_ANSWER,
+                                                payload: e.target.value,
+                                            })
+                                        }
+                                        className='form-control'
+                                        placeholder={'Type the answer'}
+                                        autoFocus
+                                    />
+                                    <div className='input-group-append'>
+                                        <button
+                                            className='btn btn-primary'
+                                            onClick={() => submit(ACTIONS.SUBMIT_ANSWER)}
+                                            type='submit'
+                                        >
+                                            Answer
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                // Show a start button for the first question
+                                <div className='input-group start-button'>
+                                    <button
+                                        className='btn btn-success btn-lg'
+                                        onClick={() => submit(ACTIONS.START_QUIZ)}
+                                    >
+                                        <strong>Start!</strong> <Emoji char='🕵🏻‍♀️' desc='woman detective' />
                                     </button>
                                 </div>
-                            </div>
+                            )}
                         </div>
                         {(prevSubmitIncorrect || hidingWrongAnswerAlert) && (
                             <div
@@ -109,21 +126,18 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
                     </form>
                 )}
             </div>
-            <div className='row'>
-                <div className='col-4'>
-                    {questionIdx > 0 && (
-                        <button
-                            className='btn btn-link back-button'
-                            onClick={() => dispatch({ type: ACTIONS.GO_PREV_QUESTION })}
-                        >
+            {questionIdx > 0 && (
+                <div className='row'>
+                    <div className='col-4'>
+                        <button className='btn btn-link back-button' onClick={() => submit(ACTIONS.GO_PREV_QUESTION)}>
                             ← Back
                         </button>
-                    )}
+                    </div>
+                    <div className='col-8 progress-col'>
+                        <Progress current={questionIdx} total={QUESTIONS.length - 1} />
+                    </div>
                 </div>
-                <div className='col-8 progress-col'>
-                    <Progress current={questionIdx + 1} total={QUESTIONS.length} />
-                </div>
-            </div>
+            )}
         </div>
     );
 };
