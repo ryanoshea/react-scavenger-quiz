@@ -1,5 +1,3 @@
-@import '../styles/variables';
-
 .question {
     opacity: 0;
     transition: opacity 200ms ease-in-out;
@@ -25,38 +23,6 @@
         }
         &.removing {
             animation-name: fade-out;
-        }
-    }
-
-    .start-button {
-        button {
-            background-color: $libertyGreen;
-            border-color: $libertyGreen;
-            margin-left: auto;
-            margin-right: auto;
-
-            &:not(:disabled):not(.disabled) {
-                &:hover {
-                    border-color: $hoverLibertyGreen;
-                    background-color: $hoverLibertyGreen;
-                }
-
-                &:active {
-                    border-color: $activeLibertyGreen;
-                    background-color: $activeLibertyGreen;
-                }
-
-                &:focus {
-                    box-shadow: 0 0 0 0.2rem $outlineLibertyGreen;
-                }
-
-                &,
-                &:hover,
-                &:active,
-                &:focus {
-                    color: $textLibertyGreen;
-                }
-            }
         }
     }
 }

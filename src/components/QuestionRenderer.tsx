@@ -4,7 +4,7 @@ import { DISPATCH_TYPE, ACTIONS, State } from '../reducer/State';
 import classNames from 'classnames';
 import './QuestionRenderer.scss';
 import Progress from './Progress';
-import Emoji from './Emoji';
+import StartButton from './StartButton';
 
 const QuestionRenderer = (props: { model: Question; state: State; dispatch: React.Dispatch<DISPATCH_TYPE> }) => {
     const {
@@ -104,12 +104,7 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
                             ) : (
                                 // Show a start button for the first question
                                 <div className='input-group start-button'>
-                                    <button
-                                        className='btn btn-success btn-lg'
-                                        onClick={() => submit(ACTIONS.START_QUIZ)}
-                                    >
-                                        <strong>Start!</strong> <Emoji char='🕵🏻‍♀️' desc='woman detective' />
-                                    </button>
+                                    <StartButton onClick={() => submit(ACTIONS.START_QUIZ)} />
                                 </div>
                             )}
                         </div>
