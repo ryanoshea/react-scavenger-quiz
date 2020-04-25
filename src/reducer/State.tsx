@@ -24,6 +24,7 @@ export const ACTIONS = {
     FINISH_HIDING_WRONG_ANSWER_ALERT: 'finishHidingWrongAnswerAlert',
     HIDE_QUESTION: 'hideQuestion',
     REVEAL_QUESTION: 'revealQuestion',
+    RESET_PROGRESS: 'resetProgress',
 };
 
 export type DISPATCH_TYPE = {
@@ -34,10 +35,13 @@ export type DISPATCH_TYPE = {
 export type REDUCER_TYPE = (state: State, action: DISPATCH_TYPE) => State;
 
 export const REDUCER: REDUCER_TYPE = (state, action) => {
-    const newState = { ...state, animations: { ...state.animations } } as State;
+    let newState = { ...state, animations: { ...state.animations } } as State;
     const question = QUESTIONS[state.questionIdx];
 
     switch (action.type) {
+        case ACTIONS.RESET_PROGRESS:
+            newState = { ...INITIAL_STATE, animations: { ...INITIAL_STATE.animations, hidingQuestion: false } };
+            break;
         case ACTIONS.START_QUIZ:
             newState.questionIdx = 1;
             newState.answer = '';

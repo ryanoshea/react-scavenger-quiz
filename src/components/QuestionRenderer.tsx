@@ -6,6 +6,8 @@ import './QuestionRenderer.scss';
 import Progress from './Progress';
 import StartButton from './StartButton';
 import Confetti from './Confetti';
+import { useCookies } from 'react-cookie';
+import { STORED_PROGRESS_COOKIE, ANIMATION_DELAY } from '../Consts';
 
 const QuestionRenderer = (props: { model: Question; state: State; dispatch: React.Dispatch<DISPATCH_TYPE> }) => {
     const {
@@ -18,8 +20,12 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
         },
         dispatch,
     } = props;
+    const [, , removeCookie] = useCookies([STORED_PROGRESS_COOKIE]);
 
-    const ANIMATION_DELAY = 400;
+    const resetProgress = () => {
+        removeCookie(STORED_PROGRESS_COOKIE);
+        submit(ACTIONS.RESET_PROGRESS);
+    };
 
     useEffect(() => dispatch({ type: ACTIONS.REVEAL_QUESTION }), [dispatch]);
 
@@ -115,14 +121,13 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
             </div>
             {questionIdx > 0 && (
                 <div className='row'>
-                    <div className='col-4'>
+                    <div className='col-4 navigation-buttons'>
                         <button className='btn btn-link back-button' onClick={() => submit(ACTIONS.GO_PREV_QUESTION)}>
                             ← Back
                         </button>
-                        {/* |
-                        <button className='btn btn-link back-button' onClick={() => submit(ACTIONS.GO_NEXT_QUESTION)}>
-                            Forward →
-                        </button> */}
+                        <button className='btn btn-link reset-button' onClick={() => resetProgress()}>
+                            <i className='fas fa-undo-alt'></i>
+                        </button>
                     </div>
                     <div className='col-8 progress-col'>
                         <Progress current={questionIdx} total={QUESTIONS.length - 1} />
