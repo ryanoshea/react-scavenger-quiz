@@ -1,9 +1,17 @@
+@import '../styles/variables';
+
 .question {
-    opacity: 0;
-    transition: opacity 200ms ease-in-out;
+    .question-body,
+    .back-button {
+        transition: opacity $fadeDelay ease-in-out;
+        opacity: 0;
+    }
 
     &.active {
-        opacity: 1;
+        .question-body,
+        .back-button {
+            opacity: 1;
+        }
     }
 
     .prompt {
@@ -16,7 +24,7 @@
     }
 
     .alert {
-        animation-duration: 200ms;
+        animation-duration: $fadeDelay;
 
         &:not(.removing) {
             animation-name: fade;

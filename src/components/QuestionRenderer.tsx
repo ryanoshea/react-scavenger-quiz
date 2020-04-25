@@ -1,35 +1,27 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Question, QUESTIONS } from '../data/QuizData';
 import { DISPATCH_TYPE, ACTIONS, State } from '../reducer/State';
 import classNames from 'classnames';
 import './QuestionRenderer.scss';
 import Progress from './Progress';
 import StartButton from './StartButton';
+import Confetti from './Confetti';
 
 const QuestionRenderer = (props: { model: Question; state: State; dispatch: React.Dispatch<DISPATCH_TYPE> }) => {
     const {
         model,
-        state: { answer, prevSubmitIncorrect, questionIdx, hidingWrongAnswerAlert },
+        state: {
+            answer,
+            prevSubmitIncorrect,
+            questionIdx,
+            animations: { hidingWrongAnswerAlert, hidingQuestion },
+        },
         dispatch,
     } = props;
 
-    const ANIMATION_DELAY = 200;
+    const ANIMATION_DELAY = 400;
 
-    const container = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        const isFirstQuestion = () => questionIdx === 0;
-        const timeout = setTimeout(
-            () => {
-                if (!container.current?.classList.contains('active')) {
-                    container.current?.classList.add('active');
-                }
-            },
-            isFirstQuestion() ? 0 : ANIMATION_DELAY
-        );
-
-        return () => clearTimeout(timeout);
-    }, [questionIdx]);
+    useEffect(() => dispatch({ type: ACTIONS.REVEAL_QUESTION }), [dispatch]);
 
     useEffect(() => {
         if (hidingWrongAnswerAlert) {
@@ -46,7 +38,7 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
 
     const submit = (action: string) => {
         if (action !== ACTIONS.SUBMIT_ANSWER || model.checkAnswer(answer)) {
-            container.current?.classList.remove('active');
+            dispatch({ type: ACTIONS.HIDE_QUESTION });
             setTimeout(
                 () =>
                     dispatch({
@@ -62,7 +54,7 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
     };
 
     return (
-        <div className={classNames('question')} ref={container}>
+        <div className={classNames('question', { active: !hidingQuestion })}>
             <div className='question-body'>
                 {model.prompts.map((prompt, i) => (
                     <p key={i} className='prompt'>
