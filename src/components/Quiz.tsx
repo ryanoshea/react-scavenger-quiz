@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import { REDUCER, INITIAL_STATE } from '../reducer/State';
 import { QUESTIONS } from '../data/QuizData';
 import QuestionRenderer from './QuestionRenderer';
@@ -6,6 +6,7 @@ import './Quiz.scss';
 import Emoji from './Emoji';
 import { useCookies } from 'react-cookie';
 import { STORED_PROGRESS_COOKIE } from '../Consts';
+import classNames from 'classnames';
 
 const Quiz = () => {
     const loadStoredProgress = (cookies: any) => {
@@ -24,14 +25,20 @@ const Quiz = () => {
     const { questionIdx } = state;
     const question = QUESTIONS[questionIdx];
     const emoji = <Emoji char='🎉' desc='celebration' />;
+    const [isHeaderReflected, setIsHeaderReflected] = useState(false);
 
     useEffect(() => {
         setCookie(STORED_PROGRESS_COOKIE, questionIdx);
     }, [questionIdx, setCookie]);
 
+    useEffect(() => {
+        const interval = setInterval(() => setIsHeaderReflected((cur: boolean) => !cur), 2000);
+        return () => clearInterval(interval);
+    }, []);
+
     return (
         <div className='quiz'>
-            <header>
+            <header className={classNames({ reflect: isHeaderReflected })}>
                 <h1>
                     {emoji}
                     <img src='./images/animoji.png' alt='tess' />

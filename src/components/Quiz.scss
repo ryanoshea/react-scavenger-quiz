@@ -36,8 +36,18 @@
 
             img {
                 display: inline-block;
-
                 margin: 0 0.5em 1em;
+            }
+
+            .emoji {
+                display: inline-block;
+            }
+        }
+
+        &.reflect {
+            .emoji,
+            img {
+                transform: scale(-1, 1);
             }
         }
     }
