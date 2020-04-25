@@ -1,5 +1,6 @@
 import React from 'react';
 import './Progress.scss';
+import Emoji from './Emoji';
 
 const Progress = (props: { current: number; total: number }) => {
     const { current, total } = props;
@@ -9,9 +10,13 @@ const Progress = (props: { current: number; total: number }) => {
     return (
         <div className='progress-wrapper'>
             <div className='label'>
-                <span>
-                    {current}/{total}
-                </span>
+                {percent < 100 ? (
+                    <span>
+                        {current} / {total}
+                    </span>
+                ) : (
+                    <Emoji char='✅' desc='green check' />
+                )}
             </div>
             <div className='progress'>
                 <div
