@@ -18,6 +18,7 @@ export const ACTIONS = {
     UPDATE_ANSWER: 'updateAnswer',
     SUBMIT_ANSWER: 'submitAnswer',
     GO_PREV_QUESTION: 'goPrevQuestion',
+    GO_NEXT_QUESTION: 'goNextQuestion',
     START_QUIZ: 'startQuiz',
     // animations
     FINISH_HIDING_WRONG_ANSWER_ALERT: 'finishHidingWrongAnswerAlert',
@@ -61,6 +62,14 @@ export const REDUCER: REDUCER_TYPE = (state, action) => {
             if (state.questionIdx > 0) {
                 newState.answer = '';
                 newState.questionIdx--;
+                newState.prevSubmitIncorrect = false;
+            }
+            newState.animations.hidingQuestion = false;
+            break;
+        case ACTIONS.GO_NEXT_QUESTION:
+            if (state.questionIdx < QUESTIONS.length - 1) {
+                newState.answer = '';
+                newState.questionIdx++;
                 newState.prevSubmitIncorrect = false;
             }
             newState.animations.hidingQuestion = false;

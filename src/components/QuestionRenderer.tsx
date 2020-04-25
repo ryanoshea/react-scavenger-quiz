@@ -119,12 +119,17 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
                         <button className='btn btn-link back-button' onClick={() => submit(ACTIONS.GO_PREV_QUESTION)}>
                             ← Back
                         </button>
+                        {/* |
+                        <button className='btn btn-link back-button' onClick={() => submit(ACTIONS.GO_NEXT_QUESTION)}>
+                            Forward →
+                        </button> */}
                     </div>
                     <div className='col-8 progress-col'>
                         <Progress current={questionIdx} total={QUESTIONS.length - 1} />
                     </div>
                 </div>
             )}
+            {questionIdx === QUESTIONS.length - 1 && <Confetti />}
         </div>
     );
 };
