@@ -38,9 +38,8 @@ const DropConfetti = () => {
         ],
         colorIndex: 0,
         colorIncrementer: 0,
-        colorThreshold: 10,
         getColor: function () {
-            if (this.colorIncrementer >= 10) {
+            if (this.colorIncrementer >= Math.floor(mp / this.colorOptions.length)) {
                 this.colorIncrementer = 0;
                 this.colorIndex++;
                 if (this.colorIndex >= this.colorOptions.length) {
