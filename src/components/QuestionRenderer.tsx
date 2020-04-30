@@ -86,7 +86,7 @@ const QuestionRenderer = (props: { model: Question; state: State; dispatch: Reac
                                             })
                                         }
                                         className='form-control'
-                                        placeholder={'Type the answer'}
+                                        placeholder='Type the answer'
                                         autoFocus
                                     />
                                     <div className='input-group-append'>
