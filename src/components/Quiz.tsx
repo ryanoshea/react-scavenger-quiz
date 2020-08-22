@@ -41,7 +41,7 @@ const Quiz = () => {
             <header className={classNames({ reflect: isHeaderReflected })}>
                 <h1>
                     {emoji}
-                    <img src='./images/animoji.png' alt='tess' />
+                    <img src='./images/animoji.png' alt='animoji' />
                     {emoji}
                 </h1>
             </header>
