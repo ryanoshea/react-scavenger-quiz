@@ -64,3 +64,14 @@ $ yarn build
 ```
 
 Built assets are written to the `build` directory. Point a static file server like [serve](https://github.com/vercel/serve) to that directory and you're good to go.
+
+## Docker 
+
+In order to use this project inside a docker container, just do:
+
+```zsh
+docker build -t react-scavenger-quiz .
+docker run -d -p 3000:80 react-scavenger-quit
+```
+
+Now you can access the quiz at http://&lt;ip-of-docker-server&gt;:3000/
