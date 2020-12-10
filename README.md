@@ -71,7 +71,7 @@ In order to use this project inside a docker container, just do:
 
 ```zsh
 docker build -t react-scavenger-quiz .
-docker run -d -p 3000:80 react-scavenger-quit
+docker run -d -p 3000:80 react-scavenger-quiz
 ```
 
 Now you can access the quiz at http://&lt;ip-of-docker-server&gt;:3000/
