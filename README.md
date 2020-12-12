@@ -65,10 +65,12 @@ $ yarn build
 
 Built assets are written to the `build` directory. Point a static file server like [serve](https://github.com/vercel/serve) to that directory and you're good to go.
 
+## Docker
 
+> Contributed by [@Jonn3y](https://github.com/Jonn3y)
 
-## Docker 
-### starting a container
+### Starting a container
+
 In order to use this project inside a docker container, just do:
 
 ```zsh
@@ -77,18 +79,25 @@ docker run -d --name react-scavenger-quiz -p 3000:80 react-scavenger-quiz
 ```
 
 Now you can access the quiz at http://&lt;ip-of-docker-server&gt;:3000/
-### stopping a container
-You can stop the container by running: 
 
-`docker stop react-scavenger-quiz`
+### Stopping a container
 
+You can stop the container by running:
 
-### deleting the outdated container
+```
+docker stop react-scavenger-quiz
+```
+
+### Deleting the outdated container
+
 In order to start a new container after rebuilding the image, you might need to delete the old container first:
 
-```docker container rm react-scavenger-quiz```
+```
+docker container rm react-scavenger-quiz
+```
 
+Now you can start a new container with the same friendly name `--name react-scavenger-quiz`:
 
-now you can start a new container with the same friendly name `--name react-scavenger-quiz`:
-
-```docker run -d --name react-scavenger-quiz -p 3000:80 react-scavenger-quiz```
+```
+docker run -d --name react-scavenger-quiz -p 3000:80 react-scavenger-quiz
+```
