@@ -10,7 +10,7 @@ In action:
 
 ## Features
 
--   Scalable to any number of questions
+-   Include any number of questions
 -   Questions can accept more than one valid answer
 -   Full JSX support for rich, dynamic question content
 -   Progress saved in browser, so you can leave and resume where you left off
@@ -19,11 +19,17 @@ In action:
 
 ## Origin
 
-I built this little quiz app in the first month of COVID-19 lockdown as a present for my partner and a way to keep in practice with React while I was looking for a new job. I've stripped the personal stuff from this repo and generalized it so anyone familiar with JSX can use it to make their own quiz.
+I built this little quiz app in the first month of COVID-19 lockdown as a present for my partner and a way to keep in practice with React while I was [looking for a new job](https://www.linkedin.com/posts/ryancoshea_layoffs-covid19-laidoff-activity-6665618940447780865-XUAE/). I've stripped the personal stuff from this repo and generalized it so anyone familiar with React can use it to make their own quiz.
 
 Here's how the original quiz looked:
 
 ![Original quiz screenshot](assets/original.png)
+
+## Feaured Versions
+
+Over on Reddit, user [JonnyKnipst](https://www.reddit.com/user/JonnyKnipst) made a [custom version for their Reddit Secret Santa giftee](https://np.reddit.com/r/secretsanta/comments/kbntiq/i_made_a_little_scavengers_huntquiz_website_to/)! They also contributed a [Dockerfile](#Docker) to this project 🙂.
+
+![JonnyKnipst's Reddit Secret Santa post, showing his giftee's custom quiz](./assets/jonn3y.secret.santa.jpg)
 
 ## Getting started
 
@@ -65,10 +71,12 @@ $ yarn build
 
 Built assets are written to the `build` directory. Point a static file server like [serve](https://github.com/vercel/serve) to that directory and you're good to go.
 
+## Docker
 
+> Contributed by [@Jonn3y](https://github.com/Jonn3y)
 
-## Docker 
-### starting a container
+### Starting a container
+
 In order to use this project inside a docker container, just do:
 
 ```zsh
@@ -77,18 +85,25 @@ docker run -d --name react-scavenger-quiz -p 3000:80 react-scavenger-quiz
 ```
 
 Now you can access the quiz at http://&lt;ip-of-docker-server&gt;:3000/
-### stopping a container
-You can stop the container by running: 
 
-`docker stop react-scavenger-quiz`
+### Stopping a container
 
+You can stop the container by running:
 
-### deleting the outdated container
+```
+docker stop react-scavenger-quiz
+```
+
+### Deleting the outdated container
+
 In order to start a new container after rebuilding the image, you might need to delete the old container first:
 
-```docker container rm react-scavenger-quiz```
+```
+docker container rm react-scavenger-quiz
+```
 
+Now you can start a new container with the same friendly name `--name react-scavenger-quiz`:
 
-now you can start a new container with the same friendly name `--name react-scavenger-quiz`:
-
-```docker run -d --name react-scavenger-quiz -p 3000:80 react-scavenger-quiz```
+```
+docker run -d --name react-scavenger-quiz -p 3000:80 react-scavenger-quiz
+```
