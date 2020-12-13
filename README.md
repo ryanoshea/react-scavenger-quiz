@@ -10,7 +10,7 @@ In action:
 
 ## Features
 
--   Scalable to any number of questions
+-   Include any number of questions
 -   Questions can accept more than one valid answer
 -   Full JSX support for rich, dynamic question content
 -   Progress saved in browser, so you can leave and resume where you left off
@@ -19,11 +19,17 @@ In action:
 
 ## Origin
 
-I built this little quiz app in the first month of COVID-19 lockdown as a present for my partner and a way to keep in practice with React while I was looking for a new job. I've stripped the personal stuff from this repo and generalized it so anyone familiar with JSX can use it to make their own quiz.
+I built this little quiz app in the first month of COVID-19 lockdown as a present for my partner and a way to keep in practice with React while I was [looking for a new job](https://www.linkedin.com/posts/ryancoshea_layoffs-covid19-laidoff-activity-6665618940447780865-XUAE/). I've stripped the personal stuff from this repo and generalized it so anyone familiar with React can use it to make their own quiz.
 
 Here's how the original quiz looked:
 
 ![Original quiz screenshot](assets/original.png)
+
+## Feaured Versions
+
+Over on Reddit, user [JonnyKnipst](https://www.reddit.com/user/JonnyKnipst) made a [custom version for their Reddit Secret Santa giftee](https://np.reddit.com/r/secretsanta/comments/kbntiq/i_made_a_little_scavengers_huntquiz_website_to/)! They also contributed a [Dockerfile](#Docker) to this project 🙂.
+
+![JonnyKnipst's Reddit Secret Santa post, showing his giftee's custom quiz](./assets/jonn3y.secret.santa.jpg)
 
 ## Getting started
 
